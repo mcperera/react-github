@@ -8,9 +8,9 @@ export const GithubContext = createContext();
 function GitHubProvider({ children }) {
   const [githubUser, setGithubUser] = useState(mockUser);
   const [repos, setRepos] = useState(mockRepos);
-  const [fllowers, setFllowers] = useState(mockFllowers);
+  const [followers, setFllowers] = useState(mockFllowers);
   return (
-    <GithubContext.Provider value={{ githubUser, repos, fllowers }}>
+    <GithubContext.Provider value={{ githubUser, repos, followers }}>
       {children}
     </GithubContext.Provider>
   );

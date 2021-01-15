@@ -4,8 +4,8 @@ import { Info, Repos, User, Search, Navbar } from "../components";
 function Dashboard() {
   return (
     <div>
-      <Navbar />
-      <Search />
+      {/* <Navbar /> */}
+      {/* <Search /> */}
       <Info />
       <User />
       <Repos />
