@@ -1,5 +1,5 @@
 import "./App.css";
-import { Dashboard, Login, PrivateRoute, AuthWrapper, Error } from "./pages";
+import { Dashboard, Login, Error } from "./pages"; //PrivateRoute, AuthWrapper
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
