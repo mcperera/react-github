@@ -4,11 +4,11 @@ import { Info, Repos, User, Search, Navbar } from "../components";
 function Dashboard() {
   return (
     <div>
-      <Info />
-      <Repos />
-      <User />
-      <Search />
       <Navbar />
+      <Search />
+      <Info />
+      <User />
+      <Repos />
     </div>
   );
 }
