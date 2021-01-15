@@ -8,7 +8,37 @@ import Doughnut2D from "../Charts/Doughnut2D";
 
 function Repos() {
   const { repos } = useContext(GithubContext);
-  return <Bar3D />;
+
+  let languages = repos.reduce((total, item) => {
+    const { language } = item;
+    if (!language) return total;
+    if (!total[language]) {
+      //if the property doesn't exsits in total[language]
+      //total[language] = 1;
+      total[language] = { label: language, value: 1 };
+    } else {
+      //total[language] = total[language] + 1;
+      total[language] = {
+        ...total[language],
+        value: total[language].value + 1,
+      };
+    }
+    return total;
+  }, {});
+
+  languages = Object.values(languages)
+    .sort((a, b) => {
+      return b.value - a.value;
+    })
+    .slice(0, 5);
+
+  return (
+    <section className="section">
+      <ReposWrapper className="section-center">
+        <Pie3D data={languages} />
+      </ReposWrapper>
+    </section>
+  );
 }
 
 const ReposWrapper = styled.div`

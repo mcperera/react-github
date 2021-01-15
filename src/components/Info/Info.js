@@ -41,7 +41,7 @@ function Info() {
   ];
 
   return (
-    <setion className="section">
+    <section className="section">
       <InfoWrapper className="section-center">
         {items.map((item) => {
           return (
@@ -51,7 +51,7 @@ function Info() {
           );
         })}
       </InfoWrapper>
-    </setion>
+    </section>
   );
 }
 
