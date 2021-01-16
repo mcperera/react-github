@@ -22,22 +22,14 @@ ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 const Pie3D = ({ data }) => {
   const chartConfigs = {
     type: "pie2d", // The chart type
-    width: "400", // Width of the chart
+    width: "100%", // Width of the chart
     height: "400", // Height of the chart
     dataFormat: "json", // Data type
     dataSource: {
       // Chart Configuration
       chart: {
-        //Set the chart caption
         caption: "Languages",
-        //Set the chart subcaption
-        // subCaption: "In MMbbl = One Million barrels",
-        //Set the x-axis name
-        xAxisName: "Languages",
-        //Set the y-axis name
-        yAxisName: "Skill Level",
         numberSuffix: " Repos",
-        //Set the theme for your chart
         theme: "fusion",
         decimals: 0,
         pieRaduiuse: `40%`,
