@@ -5,7 +5,7 @@ function Dashboard() {
   return (
     <div>
       {/* <Navbar /> */}
-      {/* <Search /> */}
+      <Search />
       <Info />
       <User />
       <Repos />
