@@ -67,8 +67,8 @@ function Repos() {
   );
 
   //stars = Object.values(stars).slice(-5).reverse();
-  // stars = Object.values(stars).reverse();
-  // forks = Object.values(forks).reverse();
+  stars = Object.values(stars).reverse().slice(0, 5);
+  forks = Object.values(forks).reverse().slice(0, 5);
 
   //console.log({ stars, forks });
 
@@ -76,9 +76,9 @@ function Repos() {
     <section className="section">
       <ReposWrapper className="section-center">
         <Pie3D data={mostUsed} />
-        <Column2D data={mostUsed} />
+        <Column2D data={stars} />
         <Doughnut2D data={mostPopular} />
-        <Bar3D data={mostUsed} />
+        <Bar3D data={forks} />
       </ReposWrapper>
     </section>
   );

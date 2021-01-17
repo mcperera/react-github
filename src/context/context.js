@@ -11,7 +11,7 @@ export const GithubContext = createContext();
 function GitHubProvider({ children }) {
   const [githubUser, setGithubUser] = useState(mockUser);
   const [repos, setRepos] = useState(mockRepos);
-  const [followers, setFllowers] = useState(mockFllowers);
+  const [followers, setFollowers] = useState(mockFllowers);
 
   const [requests, setRequests] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,15 +20,48 @@ function GitHubProvider({ children }) {
 
   const searchGitHubUser = async (user) => {
     toggleError();
-    console.log(user);
+    setIsLoading(true);
     const response = await axios(`${rootURL}/users/${user}`).catch((error) =>
       console.log(error)
     );
     if (response) {
       setGithubUser(response.data);
+      const { login, followers_url } = response.data;
+      //REPOS-->
+      // await axios(`${rootURL}/users/${login}/repos?per_page=100`)
+      //   .then((res) => {
+      //     setRepos(res.data);
+      //   })
+      //   .catch((error) => console.log(error));
+      // //Followers -->
+      // await axios(`${followers_url}?per_page`)
+      //   .then((res) => {
+      //     setFollowers(res.data);
+      //   })
+      //   .catch((error) => console.log(error));
+
+      await Promise.allSettled([
+        axios(`${rootURL}/users/${login}/repos?per_page=100`),
+        axios(`${followers_url}?per_page`),
+      ])
+        .then((result) => {
+          const [repos, followers] = result;
+          const status = "fulfilled";
+
+          if (repos.status === status) {
+            setRepos(repos.value.data);
+          }
+
+          if (followers.status === status) {
+            setFollowers(followers.value.data);
+          }
+        })
+        .catch((error) => console.log("Error -->", error));
     } else {
       toggleError(true, "There's no user with that Username");
     }
+    checkRequest();
+    setIsLoading(false);
   };
 
   const checkRequest = () => {
@@ -37,7 +70,6 @@ function GitHubProvider({ children }) {
         let {
           rate: { remaining },
         } = data;
-        console.log(remaining);
         setRequests(remaining);
         if (remaining === 0) {
           toggleError(true, "Sorry, You have exceeded your hourly rate limit!");

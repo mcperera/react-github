@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { GithubContext } from "../context/context";
 import { Info, Repos, User, Search, Navbar } from "../components";
 import loadingImg from "../assets/images/loading.gif";

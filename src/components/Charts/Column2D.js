@@ -6,7 +6,7 @@ import FusionCharts from "fusioncharts";
 
 import Column2D from "fusioncharts/fusioncharts.charts";
 
-import FusionTheme from "fusioncharts/themes/fusioncharts.theme.candy";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
@@ -21,7 +21,7 @@ const Column2DChart = ({ data }) => {
         caption: "Most Popular",
         xAxisName: "Repos",
         yAxisName: "Stars",
-        theme: "candy",
+        theme: "fusion",
         doughnutRaduiuse: `45%`,
         showPercentValues: 0,
       },
