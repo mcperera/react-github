@@ -70,7 +70,7 @@ function Repos() {
   // stars = Object.values(stars).reverse();
   // forks = Object.values(forks).reverse();
 
-  console.log("star", stars);
+  console.log({ stars, forks });
 
   return (
     <section className="section">

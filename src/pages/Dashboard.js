@@ -4,7 +4,7 @@ import { Info, Repos, User, Search, Navbar } from "../components";
 function Dashboard() {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <Search />
       <Info />
       <User />
