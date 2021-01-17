@@ -177,12 +177,13 @@ p {
   }
 }
 .loading-img {
-  width: 20rem;
-  height: 20rem;
+  width: 40rem;
+  /* height: 20rem; */
   display: block;
   margin: 0 auto;
   margin-top: 10rem;
 }
 main {
+  background: #191f26;
   padding-bottom: 2rem;
 }

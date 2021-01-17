@@ -63,6 +63,7 @@ function GitHubProvider({ children }) {
         requests,
         error,
         searchGitHubUser,
+        isLoading,
       }}>
       {children}
     </GithubContext.Provider>

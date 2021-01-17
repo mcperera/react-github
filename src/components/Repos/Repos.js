@@ -34,7 +34,7 @@ function Repos() {
       return b.value - a.value;
     })
     .slice(0, 5);
-  console.log("mostUsed ->", mostUsed);
+  //console.log("mostUsed ->", mostUsed);
 
   //Most stars per language
   const mostPopular = Object.values(languages)
@@ -49,7 +49,7 @@ function Repos() {
       }
     })
     .filter((item) => Object.keys(item).length !== 0);
-  console.log("mostPopular ->", mostPopular);
+  //console.log("mostPopular ->", mostPopular);
 
   //Stars with Forks
   let { stars, forks } = repos.reduce(
@@ -70,7 +70,7 @@ function Repos() {
   // stars = Object.values(stars).reverse();
   // forks = Object.values(forks).reverse();
 
-  console.log({ stars, forks });
+  //console.log({ stars, forks });
 
   return (
     <section className="section">
