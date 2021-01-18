@@ -1,7 +1,5 @@
-import React, { createContext, useState, useEffect } from "react"; //useState, useEffect,
-import mockUser from "./mockData/mockUser";
-import mockFllowers from "./mockData/mockFollowers";
-import mockRepos from "./mockData/mockRepos";
+import React, { createContext, useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
 const rootURL = "https://api.github.com";
@@ -9,17 +7,22 @@ const rootURL = "https://api.github.com";
 export const GithubContext = createContext();
 
 function GitHubProvider({ children }) {
-  const [githubUser, setGithubUser] = useState(mockUser);
-  const [repos, setRepos] = useState(mockRepos);
-  const [followers, setFollowers] = useState(mockFllowers);
+  const { isAuthenticated, user } = useAuth0();
+
+  const userGit = isAuthenticated && user.nickname;
+
+  const [githubUser, setGithubUser] = useState(null);
+  const [repos, setRepos] = useState(null);
+  const [followers, setFollowers] = useState(null);
 
   const [requests, setRequests] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState({ show: false, msg: "" });
 
-  const searchGitHubUser = async (user) => {
+  const searchGitHubUser = async (user = "mcperera") => {
     toggleError();
+    hideError();
     setIsLoading(true);
     const response = await axios(`${rootURL}/users/${user}`).catch((error) =>
       console.log(error)
@@ -59,6 +62,7 @@ function GitHubProvider({ children }) {
         .catch((error) => console.log("Error -->", error));
     } else {
       toggleError(true, "There's no user with that Username");
+      hideError();
     }
     checkRequest();
     setIsLoading(false);
@@ -73,6 +77,7 @@ function GitHubProvider({ children }) {
         setRequests(remaining);
         if (remaining === 0) {
           toggleError(true, "Sorry, You have exceeded your hourly rate limit!");
+          hideError();
         }
       })
       .catch((error) => {
@@ -84,7 +89,18 @@ function GitHubProvider({ children }) {
     setError({ show, msg });
   }
 
+  function hideError() {
+    setTimeout(() => toggleError(), 5000);
+  }
+
   useEffect(checkRequest, []);
+  useEffect(() => {
+    if (userGit) {
+      searchGitHubUser(userGit);
+    } else {
+      searchGitHubUser();
+    }
+  }, [userGit]);
 
   return (
     <GithubContext.Provider
