@@ -7,9 +7,9 @@ const rootURL = "https://api.github.com";
 export const GithubContext = createContext();
 
 function GitHubProvider({ children }) {
-  const { isAuthenticated, user } = useAuth0();
+  // const { isAuthenticated, user } = useAuth0();
 
-  const userGit = isAuthenticated && user.nickname;
+  // const userGit = isAuthenticated && user.nickname;
 
   const [githubUser, setGithubUser] = useState(null);
   const [repos, setRepos] = useState(null);
@@ -95,12 +95,13 @@ function GitHubProvider({ children }) {
 
   useEffect(checkRequest, []);
   useEffect(() => {
-    if (userGit) {
-      searchGitHubUser(userGit);
-    } else {
-      searchGitHubUser();
-    }
-  }, [userGit]);
+    // if (userGit) {
+    //   searchGitHubUser(userGit);
+    // } else {
+    //   searchGitHubUser();
+    // }
+    searchGitHubUser();
+  }, []);
 
   return (
     <GithubContext.Provider
